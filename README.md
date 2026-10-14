@@ -1,27 +1,51 @@
 # Haijun Ecosystem Schemas
 
-Schema files for Haijun ecosystem, registered at https://json.schemastore.org/
+JSON Schema files for the Haijun ecosystem.
+
+These schemas are published through **two paths**:
+
+| Path | Base URL | Status | Notes |
+|------|----------|--------|-------|
+| **Raw (GitHub)** | `https://raw.githubusercontent.com/takebox/schemastore/main/` | ✅ Live now | Instant, no review. Use this today. |
+| **SchemaStore (official)** | `https://json.schemastore.org/` | ⏳ Pending merge | Canonical URL, matches each schema `$id`. Live once the PR to `SchemaStore/schemastore` is merged. |
+
+Both serve the exact same schema content; only the host differs.
 
 ## Available Schemas
 
-| Schema | URL | Description | Based On |
-|--------|-----|-------------|----------|
-| `haijun-code-settings.json` | https://json.schemastore.org/haijun-code-settings.json | Configuration settings for Haijun Code | Haijun Code Settings |
-| `haijun-code-marketplace.json` | https://json.schemastore.org/haijun-code-marketplace.json | Marketplace plugin manifest for Haijun Code | Haijun Code Marketplace |
-| `haijun-code-plugin-manifest.json` | https://json.schemastore.org/haijun-code-plugin-manifest.json | Plugin manifest for Haijun Code | OpenAI Plugin Manifest |
-| `haijun-tracks-discovery.json` | https://json.schemastore.org/haijun-tracks-discovery.json | Discovery endpoint for Haijun Tracks | Juglow Tracks Discovery |
-| `haijun-box.json` | https://json.schemastore.org/haijun-box.json | Plugin manifest for Haijun Box CLI | OpenAI Plugin Manifest |
-| `haijun-voice.json` | https://json.schemastore.org/haijun-voice.json | Extension manifest for Haijun Voice | Gemini CLI Extensions |
-| `tracks.json` | https://json.schemastore.org/tracks.json | Knowledge base format for AI agents | Tracks JSON |
-| `haijun-turborepo.json` | https://json.schemastore.org/haijun-turborepo.json | Turborepo configuration for Haijun projects | turbo.build/schema.json |
-| `haijun-changesets.json` | https://json.schemastore.org/haijun-changesets.json | Changesets configuration for Haijun projects | @changesets/config |
-| `haijun-release-please.json` | https://json.schemastore.org/haijun-release-please.json | Release Please configuration for Haijun projects | googleapis/release-please |
+| Schema | Raw (live now) | Official (after merge) |
+|--------|----------------|------------------------|
+| `haijun-code-settings.json` | https://raw.githubusercontent.com/takebox/schemastore/main/haijun-code-settings.json | https://json.schemastore.org/haijun-code-settings.json |
+| `haijun-code-marketplace.json` | https://raw.githubusercontent.com/takebox/schemastore/main/haijun-code-marketplace.json | https://json.schemastore.org/haijun-code-marketplace.json |
+| `haijun-code-plugin-manifest.json` | https://raw.githubusercontent.com/takebox/schemastore/main/haijun-code-plugin-manifest.json | https://json.schemastore.org/haijun-code-plugin-manifest.json |
+| `haijun-tracks-discovery.json` | https://raw.githubusercontent.com/takebox/schemastore/main/haijun-tracks-discovery.json | https://json.schemastore.org/haijun-tracks-discovery.json |
+| `haijun-box.json` | https://raw.githubusercontent.com/takebox/schemastore/main/haijun-box.json | https://json.schemastore.org/haijun-box.json |
+| `haijun-voice.json` | https://raw.githubusercontent.com/takebox/schemastore/main/haijun-voice.json | https://json.schemastore.org/haijun-voice.json |
+| `tracks.json` | https://raw.githubusercontent.com/takebox/schemastore/main/tracks.json | https://json.schemastore.org/tracks.json |
+| `haijun-turborepo.json` | https://raw.githubusercontent.com/takebox/schemastore/main/haijun-turborepo.json | https://json.schemastore.org/haijun-turborepo.json |
+| `haijun-changesets.json` | https://raw.githubusercontent.com/takebox/schemastore/main/haijun-changesets.json | https://json.schemastore.org/haijun-changesets.json |
+| `haijun-release-please.json` | https://raw.githubusercontent.com/takebox/schemastore/main/haijun-release-please.json | https://json.schemastore.org/haijun-release-please.json |
 
 ## Usage
 
-Add `$schema` to your configuration files for autocomplete and validation:
+Add `$schema` to your configuration files for autocomplete and validation.
 
-### Haijun Code Settings
+Use the **raw URL today** (works immediately), and switch to the **official URL**
+once the SchemaStore PR is merged (or keep raw — both are valid).
+
+### Option A — Raw (live now)
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/takebox/schemastore/main/haijun-code-settings.json",
+  "permissions": {
+    "allow": ["Bash(npm *)", "Read"]
+  }
+}
+```
+
+### Option B — Official (after SchemaStore merge)
+
 ```json
 {
   "$schema": "https://json.schemastore.org/haijun-code-settings.json",
@@ -31,105 +55,46 @@ Add `$schema` to your configuration files for autocomplete and validation:
 }
 ```
 
-### Haijun Box Plugin
+### More examples
+
 ```json
-{
-  "$schema": "https://json.schemastore.org/haijun-box.json",
-  "schema_version": "v1",
-  "name_for_human": "My Plugin",
-  "name_for_model": "my_plugin",
-  "description_for_human": "A plugin for Haijun Box",
-  "description_for_model": "This plugin helps users with...",
-  "auth": { "type": "none" },
-  "api": { "type": "openapi", "url": "https://example.com/openapi.json" }
-}
+{ "$schema": "https://raw.githubusercontent.com/takebox/schemastore/main/haijun-box.json", "schema_version": "v1" }
+{ "$schema": "https://raw.githubusercontent.com/takebox/schemastore/main/haijun-voice.json", "name": "my-voice-extension" }
+{ "$schema": "https://raw.githubusercontent.com/takebox/schemastore/main/tracks.json", "name": "my-track", "version": "1.0.0" }
+{ "$schema": "https://raw.githubusercontent.com/takebox/schemastore/main/haijun-turborepo.json", "tasks": { "build": { "outputs": ["dist/**"], "dependsOn": ["^build"] } } }
+{ "$schema": "https://raw.githubusercontent.com/takebox/schemastore/main/haijun-changesets.json", "access": "public", "baseBranch": "main" }
+{ "$schema": "https://raw.githubusercontent.com/takebox/schemastore/main/haijun-release-please.json", "packages": { ".": { "release-type": "node" } } }
 ```
 
-### Haijun Voice Extension
-```json
-{
-  "$schema": "https://json.schemastore.org/haijun-voice.json",
-  "name": "my-voice-extension",
-  "version": "1.0.0",
-  "description": "Voice extension for Haijun",
-  "platforms": ["windows", "macos", "linux"]
-}
-```
+## Which path should I use?
 
-### Tracks
-```json
-{
-  "$schema": "https://json.schemastore.org/tracks.json",
-  "name": "my-track",
-  "version": "1.0.0",
-  "description": "A knowledge track for AI agents",
-  "type": "knowledge",
-  "category": "programming"
-}
-```
+- **Use raw** if you want it working *right now* — zero delay, no dependency on review.
+- **Use the official URL** if you want the canonical, editor-auto-discovered URL that matches each schema `$id`.
+- **Best of both:** use raw now and the official URL later; they are interchangeable.
 
-### Turborepo
-```json
-{
-  "$schema": "https://json.schemastore.org/haijun-turborepo.json",
-  "tasks": {
-    "build": {
-      "outputs": ["dist/**"],
-      "dependsOn": ["^build"]
-    }
-  }
-}
-```
+## Registration (official)
 
-### Changesets
-```json
-{
-  "$schema": "https://json.schemastore.org/haijun-changesets.json",
-  "$schema": "https://json.schemastore.org/haijun-changesets.json",
-  "changelog": "@changesets/cli/changelog",
-  "commit": false,
-  "fixed": [],
-  "linked": [],
-  "access": "public",
-  "baseBranch": "main",
-  "updateInternalDependencies": "patch",
-  "ignore": []
-}
-```
+To make these live at `https://json.schemastore.org/`:
 
-### Release Please
-```json
-{
-  "$schema": "https://json.schemastore.org/haijun-release-please.json",
-  "packages": {
-    ".": {
-      "release-type": "node",
-      "component": "my-project"
-    }
-  }
-}
-```
-
-## Registration
-
-To register new schemas at https://json.schemastore.org/:
 1. Fork https://github.com/SchemaStore/schemastore
 2. Add schema file to `src/schemas/json/`
-3. Add schema URL to `src/api/json/catalog.json`
-4. Submit PR
+3. Add the schema entry to `src/api/json/catalog.json`
+4. Submit a PR and wait for review/merge
+
+Until then, the raw path above is the live option.
 
 ## Ecosystem
 
 ### Haijun AI Platform
-- **Haijun Code**: https://code.haijun.my.id - AI coding assistant (CLI)
-- **Haijun Box**: https://box.haijun.my.id - CLI desktop AI assistant
-- **Haijun Voice**: https://voice.haijun.my.id - Cross-platform AI voice assistant
+- **Haijun Code**: https://code.haijun.my.id — AI coding assistant (CLI)
+- **Haijun Box**: https://box.haijun.my.id — CLI desktop AI assistant
+- **Haijun Voice**: https://voice.haijun.my.id — Cross-platform AI voice assistant
 
 ### Tracks Platform
-- **Tracks**: https://tracks.web.id - Knowledge base for AI agents
-- **Agent Tracks**: https://agent.tracks.web.id - Agent-specific tracks
+- **Tracks**: https://tracks.web.id — Knowledge base for AI agents
+- **Agent Tracks**: https://agent.tracks.web.id — Agent-specific tracks
 
 ### Organization
-- **GitHub**: https://github.com/track-md
+- **GitHub**: https://github.com/takebox
 - **NPM**: https://npmjs.com/~takebox-ai
 - **Foundation**: JuGloW (juglow.my.id)
